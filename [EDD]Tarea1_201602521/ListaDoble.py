@@ -1,4 +1,5 @@
 from NodoDoble import *
+import os
 class ListaDoble:
     
      #si ya importe la clase aqui entonces ya puedo utilizar sus atributos
@@ -6,7 +7,8 @@ class ListaDoble:
         #self.PrimerNodo=NodoDoble()#esto ya no tiene sentido pero por pasados lenguajes de programacion lo dejare
         self.PrimerNodo=None
         self.UltimoNodo=None
-        self.contador=0
+        self.contador=0#Sirve para llevar un control del tamano de la lista
+        self.contadorGrafica=0#Sirve para poder cambiar de nombre entre documentos e imagenes
 
     def Insertar_Final(self,valor):
         
@@ -144,6 +146,33 @@ class ListaDoble:
         
         elif indice>self.contador:
             print('Error se ha excedido Index de la lista No Se Puede Mostrar El Valor Que Establecio')
-        
-        print('')
+    
+    def Graficar(self):
+        self.contadorGrafica+=1
+        archivo=open("nuevo"+str(self.contadorGrafica)+".dot","w")#uso el contador para poder crear diversos archivos .dot al igual que imagenes de distinto nombre
+        archivo.write("digraph G {\n")
+        archivo.write("rankdir=LR;\n")
+        archivo.write("node [shape=record];\n")
+        self.NodoAux=NodoDoble()
+        self.NodoAux2=NodoDoble()
+        self.NodoAux=self.PrimerNodo
+         
+        while self.NodoAux is not None:
+            
+            archivo.write(str(self.NodoAux.dato)+"[shape=box];\n")
+
+            self.NodoAux=self.NodoAux.Siguiente
+        self.NodoAux=self.PrimerNodo
+        while self.NodoAux is not None:
+            if self.NodoAux.Siguiente is not None:
+                self.NodoAux2=self.NodoAux.Siguiente
+                archivo.write(str(self.NodoAux.dato)+":ref:c->"+str(self.NodoAux2.dato)+"\n")
+                archivo.write(str(self.NodoAux2.dato)+":ref:c->"+str(self.NodoAux.dato)+"\n")
+            
+
+            self.NodoAux=self.NodoAux.Siguiente
+        archivo.write("}")
+        archivo.close()
+        os.system("dot -Tjpg nuevo"+str(self.contadorGrafica)+".dot -o imagen"+str(self.contadorGrafica)+".jpg")
+            
 
