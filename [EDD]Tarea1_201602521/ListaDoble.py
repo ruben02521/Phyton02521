@@ -70,7 +70,7 @@ class ListaDoble:
                     self.PrimerNodo=self.NodoCreado#por ende el primero sera ahora el nuevo
                     self.NodoAux.anterior=self.PrimerNodo#este NodoAux Esta apuntando al primero que ahora es segundo, ahora apunta en su anterior al nuevoNodo que es ahora el primero
                     self.PrimerNodo.Siguiente=self.NodoAux#Este primero es ya el NuevoNodo que ingrese entonces apunto al nodoAux que era antes el primero pero ahora esta como segundo
-                    self.contador+=1#sirve para verificar si ya he llegado al indice
+                    self.contador+=1#sirve para notificar que ya se a aumentado la lista en uno mas
                 elif contadorAux==indice: #si no es el primero entonces es el segundo,tercero,etc....
                     self.NodoCreado.dato=Valor#le asigno el valor al nuevo nodo creado
                     self.NodoAux2.Siguiente=self.NodoCreado#como el nodo Aux2 esta siempre apuntando detras del nodoAux entonces tengo el puntero de atras antes de implantar el nuevo nodo en medio de los dos
@@ -166,8 +166,8 @@ class ListaDoble:
         while self.NodoAux is not None:
             if self.NodoAux.Siguiente is not None:
                 self.NodoAux2=self.NodoAux.Siguiente
-                archivo.write(str(self.NodoAux.dato)+":ref:c->"+str(self.NodoAux2.dato)+"\n")
-                archivo.write(str(self.NodoAux2.dato)+":ref:c->"+str(self.NodoAux.dato)+"\n")
+                archivo.write(str(self.NodoAux.dato)+"->"+str(self.NodoAux2.dato)+"\n")
+                archivo.write(str(self.NodoAux2.dato)+"->"+str(self.NodoAux.dato)+"\n")
             
 
             self.NodoAux=self.NodoAux.Siguiente
